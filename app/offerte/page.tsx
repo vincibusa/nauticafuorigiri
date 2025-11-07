@@ -69,16 +69,7 @@ export default function OffertePage() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <motion.div
-              className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary/80 shadow-lg shadow-primary/20 sm:h-20 sm:w-20"
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Sparkles
-                className="h-8 w-8 text-primary-foreground sm:h-10 sm:w-10"
-                aria-hidden="true"
-              />
-            </motion.div>
+   
           </motion.div>
           <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             Le Nostre Offerte

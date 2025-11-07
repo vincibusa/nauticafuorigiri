@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { createMetadata } from "@/lib/metadata"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,11 +16,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Nautica Fuorigiri - Servizi Nautici di Qualità",
+export const metadata: Metadata = createMetadata({
+  title: "Home",
   description:
-    "Nautica Fuorigiri nasce dalla passione per la nautica e dall'esigenza di fornire ai nostri clienti un servizio di qualità ed una professionalità che non si erano mai viste in questo campo.",
-};
+    "Nautica Fuorigiri - Servizi nautici professionali: riparazione motori, manutenzione imbarcazioni, trasporto, rimessaggio. Concessionari autorizzati MERCURY, MERCRUISER, SELVA. Assistenza in tutta Italia.",
+  path: "/",
+  keywords: [
+    "nautica",
+    "riparazione motori nautici",
+    "manutenzione barche",
+    "rimessaggio barche",
+    "trasporto imbarcazioni",
+    "Canino",
+    "Viterbo",
+    "Lazio",
+    "MERCURY",
+    "MERCRUISER",
+    "SELVA",
+  ],
+});
 
 export default function RootLayout({
   children,
@@ -30,9 +46,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Skip to main content link for accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+        >
+          Salta al contenuto principale
+        </a>
         <div className="flex min-h-screen flex-col">
           <Header />
-          <main className="flex-1">{children}</main>
+          <Breadcrumbs />
+          <main id="main-content" className="flex-1" role="main" tabIndex={-1}>
+            {children}
+          </main>
           <Footer />
         </div>
       </body>

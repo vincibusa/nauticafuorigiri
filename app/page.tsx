@@ -4,50 +4,99 @@ import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Card, CardDescription, CardTitle } from "@/components/ui/card"
-import { Anchor, Wrench, Calendar, Shield, Star, ArrowRight, Waves, CheckCircle, Truck } from "lucide-react"
+import { Card, CardDescription, CardTitle, CardHeader, CardContent } from "@/components/ui/card"
+import { Anchor, Wrench, Calendar, Shield, Star, ArrowRight, Waves, CheckCircle, Truck, CheckCircle2, Award, Ship } from "lucide-react"
 import { FadeIn, StaggerContainer, SlideUp, ScaleIn } from "@/components/animations"
+import { LocalBusinessSchema, OrganizationSchema, ServiceSchema } from "@/components/structured-data"
 
 export default function Home() {
-  const mainServices = [
+  const services = [
+    {
+      title: "Assistenza Mobile in Tutta Italia",
+      description:
+        "Disponiamo di un officina mobile dotata di tutte le attrezzature necessarie per la manutenzione e riparazione. Siamo in grado di prestarvi assistenza in tutta Italia, portando la nostra professionalità direttamente da voi.",
+      image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200&q=80",
+      features: [
+        "Officina mobile completamente attrezzata",
+        "Interventi su tutto il territorio italiano",
+        "Attrezzature professionali",
+        "Interventi rapidi e efficienti",
+      ],
+    },
+    {
+      title: "Manutenzione e Riparazione Barche",
+      description:
+        "Servizi completi di riparazione e manutenzione per imbarcazioni di ogni genere, dalla grande alla piccina. La nostra esperienza ci permette di affrontare qualsiasi tipo di intervento con professionalità e competenza.",
+      image: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=1200&q=80",
+      features: [
+        "Riparazione imbarcazioni di ogni dimensione",
+        "Manutenzione ordinaria e straordinaria",
+        "Riparazione scafi e carene",
+        "Sistemi elettrici e idraulici",
+      ],
+    },
     {
       title: "Riparazione e Rifacimento Motori",
       description:
-        "Specializzati nella riparazione di piedi poppieri e motori entrofuoribordo. Ripariamo e rifacciamo a nuovo motori entrobordo, entrofuoribordo e fuoribordo di tutte le marche.",
-      icon: Wrench,
+        "Specializzati nella riparazione di piedi poppieri e motori entrofuoribordo. Ripariamo e rifacciamo a nuovo motori entrobordo, entrofuoribordo e fuoribordo di tutte le marche con competenza e professionalità.",
       image: "https://images.unsplash.com/photo-1594736797933-d0c0aa0a3d0a?w=1200&q=80",
+      features: [
+        "Riparazione piedi poppieri",
+        "Riparazione motori entrofuoribordo",
+        "Riparazione motori entrobordo",
+        "Riparazione motori fuoribordo tutte le marche",
+        "Rifacimento motori a nuovo",
+        "Diagnostica avanzata",
+      ],
     },
     {
-      title: "Riparazione Imbarcazioni",
+      title: "Rimessaggio e Ricovero Invernale",
       description:
-        "Riparazione e manutenzione per imbarcazioni di ogni genere, dalla grande alla piccina, con professionalità e competenza.",
-      icon: Anchor,
-      image: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=1200&q=80",
+        "Servizio di rimessaggio sia al coperto che all'esterno. Disponiamo di un terreno di 30.000 mq con una struttura coperta di 250 mq per officina e rimessaggio, più 2 strutture esterne per rimessaggio al chiuso.",
+      image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&q=80",
+      features: [
+        "Rimessaggio coperto ed esterno",
+        "Terreno di 30.000 mq",
+        "Struttura coperta 250 mq",
+        "2 strutture esterne per rimessaggio",
+        "Posto barca da 50€/mese",
+      ],
     },
     {
       title: "Trasporto Imbarcazioni",
       description:
-        "Servizio di trasporto imbarcazioni in tutta Italia con attrezzature specializzate e personale esperto.",
-      icon: Truck,
+        "Servizio di trasporto imbarcazioni in tutta Italia. Trasportiamo la tua barca in sicurezza e professionalità ovunque tu ne abbia bisogno, con attrezzature specializzate e personale esperto.",
       image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&q=80",
+      features: [
+        "Trasporto in tutta Italia",
+        "Attrezzature specializzate",
+        "Personale esperto e qualificato",
+        "Trasporto sicuro e garantito",
+        "Preventivo gratuito",
+      ],
     },
     {
-      title: "Rimessaggio",
+      title: "Consulenza e Assistenza Tecnica",
       description:
-        "Rimessaggio coperto ed esterno su terreno di 30.000 mq con struttura coperta di 250 mq e 2 strutture esterne.",
-      icon: Calendar,
-      image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&q=80",
-    },
-    {
-      title: "Concessionari Autorizzati",
-      description:
-        "Concessionari MERCURY, MERCRUISER, SELVA per motori. Concessionari EOLO, ASTARON, ALASKA BOAT per imbarcazioni.",
-      icon: Shield,
+        "Offriamo consulenza tecnica per aiutarti a prendere le migliori decisioni per la tua barca. La nostra esperienza è a tua disposizione per qualsiasi dubbio o necessità.",
       image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80",
+      features: [
+        "Consulenza gratuita",
+        "Valutazione stato barca",
+        "Preventivi dettagliati",
+        "Assistenza post-vendita",
+      ],
     },
   ]
 
   return (
+    <>
+      <LocalBusinessSchema />
+      <OrganizationSchema />
+      <ServiceSchema
+        serviceName="Servizi Nautici Professionali"
+        description="Servizi completi per la manutenzione, riparazione e assistenza di imbarcazioni e motori nautici in tutta Italia."
+      />
     <div className="flex flex-col">
       {/* Hero Section */}
       <section
@@ -63,6 +112,7 @@ export default function Home() {
             className="object-cover"
             priority
             sizes="100vw"
+            quality={90}
           />
           {/* Dark overlay for text readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/60" />
@@ -164,7 +214,7 @@ export default function Home() {
                     size="lg"
                     className="w-full text-sm sm:text-base bg-background/90 backdrop-blur-sm border-white/20 text-foreground hover:bg-background focus-visible:ring-2 focus-visible:ring-offset-2"
                   >
-                    <Link href="/servizi" aria-label="Scopri i nostri servizi">
+                    <Link href="#servizi" aria-label="Scopri i nostri servizi">
                       I Nostri Servizi
                     </Link>
                   </Button>
@@ -175,30 +225,43 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Main Services Section */}
+      {/* Services Section */}
       <section
-        className="relative py-12 sm:py-16 md:py-24"
+        id="servizi"
+        className="relative overflow-hidden py-12 sm:py-20 md:py-32"
         aria-labelledby="services-heading"
       >
         <div className="container px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="mx-auto mb-12 max-w-2xl text-center sm:mb-16">
-
+            <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+              <motion.div
+                className="mb-4 inline-block"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
+                  <Star className="h-4 w-4" aria-hidden="true" />
+                  Servizi Professionali
+                </span>
+              </motion.div>
               <h2
                 id="services-heading"
-                className="mb-4 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl"
+                className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
               >
                 I Nostri Servizi
               </h2>
-              <p className="text-base text-muted-foreground sm:text-lg">
-                Soluzioni complete per tutte le tue esigenze nautiche
+              <p className="text-base text-muted-foreground sm:text-lg md:text-xl">
+                Siamo in grado di prestarvi assistenza in tutta Italia. Disponiamo di
+                un officina mobile dotata di tutte le attrezzature necessarie per la
+                manutenzione e riparazione.
               </p>
             </div>
           </FadeIn>
 
           <StaggerContainer>
             <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {mainServices.map((service, index) => {
+              {services.map((service, index) => {
                 return (
                   <motion.div
                     key={service.title}
@@ -208,7 +271,7 @@ export default function Home() {
                     transition={{ delay: index * 0.1, duration: 0.5 }}
                     whileHover={{ scale: 1.02 }}
                   >
-                    <Card className="group relative h-full min-h-[320px] sm:min-h-[360px] overflow-hidden border-0 transition-all hover:shadow-2xl focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 cursor-pointer">
+                    <Card className="group relative h-full min-h-[400px] sm:min-h-[450px] overflow-hidden border-0 transition-all hover:shadow-2xl focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 cursor-pointer">
                       {/* Full image background */}
                       <div className="absolute inset-0">
                         <Image
@@ -218,20 +281,45 @@ export default function Home() {
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           priority={index < 3}
+                          loading={index < 3 ? undefined : "lazy"}
+                          quality={85}
                         />
                       </div>
                       
                       {/* Dark overlay for text readability */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30 group-hover:from-black/95 group-hover:via-black/70 transition-all duration-300" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/40 group-hover:from-black/98 group-hover:via-black/80 transition-all duration-300" />
                       
                       {/* Content overlay */}
                       <div className="relative h-full flex flex-col justify-end p-6 sm:p-8 text-white z-10">
                         <CardTitle className="text-lg font-bold mb-3 sm:text-xl lg:text-2xl text-white drop-shadow-lg">
                           {service.title}
                         </CardTitle>
-                        <CardDescription className="text-sm sm:text-base text-white/95 leading-relaxed drop-shadow-md line-clamp-3 sm:line-clamp-4">
+                        <CardDescription className="text-sm sm:text-base text-white/95 leading-relaxed drop-shadow-md mb-4 line-clamp-2 sm:line-clamp-3">
                           {service.description}
                         </CardDescription>
+                        <ul className="space-y-2" aria-label="Caratteristiche del servizio">
+                          {service.features.slice(0, 3).map((feature, idx) => (
+                            <motion.li
+                              key={idx}
+                              className="flex items-start gap-2 text-xs sm:text-sm"
+                              initial={{ opacity: 0, x: -10 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: idx * 0.1 }}
+                            >
+                              <CheckCircle2
+                                className="mt-0.5 h-3 w-3 shrink-0 text-white sm:h-4 sm:w-4"
+                                aria-hidden="true"
+                              />
+                              <span className="text-white/90 drop-shadow-sm">{feature}</span>
+                            </motion.li>
+                          ))}
+                          {service.features.length > 3 && (
+                            <li className="text-xs sm:text-sm text-white/80 italic">
+                              +{service.features.length - 3} altre caratteristiche
+                            </li>
+                          )}
+                        </ul>
                       </div>
                     </Card>
                   </motion.div>
@@ -240,151 +328,264 @@ export default function Home() {
             </div>
           </StaggerContainer>
 
-          <FadeIn delay={0.6}>
-            <div className="mt-12 text-center sm:mt-16">
+          {/* Brands Section */}
+          <FadeIn delay={0.5}>
+            <div className="mt-12 sm:mt-16">
+              <div className="mx-auto mb-8 max-w-3xl text-center sm:mb-12">
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="text-sm shadow-sm hover:shadow-md sm:text-base focus-visible:ring-2 focus-visible:ring-offset-2"
+                  className="mb-4 inline-block"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
                 >
-                  <Link href="/servizi" aria-label="Scopri tutti i nostri servizi">
-                    Scopri Tutti i Servizi
-                    <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                  </Link>
-                </Button>
+                  <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
+                    <Award className="h-4 w-4" aria-hidden="true" />
+                    Marchi Autorizzati
+                  </span>
+                </motion.div>
+                <h3 className="mb-4 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
+                  I Nostri Marchi
+                </h3>
+                <p className="text-base text-muted-foreground sm:text-lg">
+                  Siamo concessionari e rivenditori autorizzati dei migliori marchi del settore nautico
+                </p>
+              </div>
+
+              <StaggerContainer>
+                <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {/* Motori */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1, duration: 0.5 }}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <Card className="group relative h-full min-h-[400px] sm:min-h-[450px] overflow-hidden border-0 transition-all hover:shadow-2xl focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 cursor-pointer">
+                      {/* Full image background */}
+                      <div className="absolute inset-0">
+                        <Image
+                          src="https://images.unsplash.com/photo-1594736797933-d0c0aa0a3d0a?w=1200&q=80"
+                          alt="Motori nautici"
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          loading="lazy"
+                          quality={85}
+                        />
+                      </div>
+                      
+                      {/* Dark overlay for text readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/40 group-hover:from-black/98 group-hover:via-black/80 transition-all duration-300" />
+                      
+                      {/* Content overlay */}
+                      <div className="relative h-full flex flex-col justify-end p-6 sm:p-8 text-white z-10">
+                        <CardTitle className="text-lg font-bold mb-3 sm:text-xl lg:text-2xl text-white drop-shadow-lg">
+                          Motori
+                        </CardTitle>
+                        <ul className="space-y-2" aria-label="Marchi motori">
+                          <motion.li
+                            className="flex items-start gap-2 text-xs sm:text-sm"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                          >
+                            <CheckCircle2
+                              className="mt-0.5 h-3 w-3 shrink-0 text-white sm:h-4 sm:w-4"
+                              aria-hidden="true"
+                            />
+                            <span className="text-white/90 drop-shadow-sm"><strong className="font-semibold">MERCURY</strong> - Motori fuoribordo benzina ed elettrici</span>
+                          </motion.li>
+                          <motion.li
+                            className="flex items-start gap-2 text-xs sm:text-sm"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                          >
+                            <CheckCircle2
+                              className="mt-0.5 h-3 w-3 shrink-0 text-white sm:h-4 sm:w-4"
+                              aria-hidden="true"
+                            />
+                            <span className="text-white/90 drop-shadow-sm"><strong className="font-semibold">MERCRUISER</strong> - Motori entrofuoribordo benzina e diesel</span>
+                          </motion.li>
+                          <motion.li
+                            className="flex items-start gap-2 text-xs sm:text-sm"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                          >
+                            <CheckCircle2
+                              className="mt-0.5 h-3 w-3 shrink-0 text-white sm:h-4 sm:w-4"
+                              aria-hidden="true"
+                            />
+                            <span className="text-white/90 drop-shadow-sm"><strong className="font-semibold">SELVA</strong> - Motori fuoribordo benzina ed elettrici</span>
+                          </motion.li>
+                        </ul>
+                      </div>
+                    </Card>
+                  </motion.div>
+
+                  {/* Imbarcazioni */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2, duration: 0.5 }}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <Card className="group relative h-full min-h-[400px] sm:min-h-[450px] overflow-hidden border-0 transition-all hover:shadow-2xl focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 cursor-pointer">
+                      {/* Full image background */}
+                      <div className="absolute inset-0">
+                        <Image
+                          src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=1200&q=80"
+                          alt="Imbarcazioni"
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          loading="lazy"
+                          quality={85}
+                        />
+                      </div>
+                      
+                      {/* Dark overlay for text readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/40 group-hover:from-black/98 group-hover:via-black/80 transition-all duration-300" />
+                      
+                      {/* Content overlay */}
+                      <div className="relative h-full flex flex-col justify-end p-6 sm:p-8 text-white z-10">
+                        <CardTitle className="text-lg font-bold mb-3 sm:text-xl lg:text-2xl text-white drop-shadow-lg">
+                          Imbarcazioni
+                        </CardTitle>
+                        <ul className="space-y-2" aria-label="Marchi imbarcazioni">
+                          <motion.li
+                            className="flex items-start gap-2 text-xs sm:text-sm"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                          >
+                            <CheckCircle2
+                              className="mt-0.5 h-3 w-3 shrink-0 text-white sm:h-4 sm:w-4"
+                              aria-hidden="true"
+                            />
+                            <span className="text-white/90 drop-shadow-sm"><strong className="font-semibold">EOLO</strong> - Concessionari imbarcazioni</span>
+                          </motion.li>
+                          <motion.li
+                            className="flex items-start gap-2 text-xs sm:text-sm"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                          >
+                            <CheckCircle2
+                              className="mt-0.5 h-3 w-3 shrink-0 text-white sm:h-4 sm:w-4"
+                              aria-hidden="true"
+                            />
+                            <span className="text-white/90 drop-shadow-sm"><strong className="font-semibold">ASTARON</strong> - Concessionari imbarcazioni</span>
+                          </motion.li>
+                          <motion.li
+                            className="flex items-start gap-2 text-xs sm:text-sm"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                          >
+                            <CheckCircle2
+                              className="mt-0.5 h-3 w-3 shrink-0 text-white sm:h-4 sm:w-4"
+                              aria-hidden="true"
+                            />
+                            <span className="text-white/90 drop-shadow-sm"><strong className="font-semibold">ALASKA BOAT</strong> - Barche da pesca in alluminio</span>
+                          </motion.li>
+                          <motion.li
+                            className="flex items-start gap-2 text-xs sm:text-sm"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.4 }}
+                          >
+                            <CheckCircle2
+                              className="mt-0.5 h-3 w-3 shrink-0 text-white sm:h-4 sm:w-4"
+                              aria-hidden="true"
+                            />
+                            <span className="text-white/90 drop-shadow-sm"><strong className="font-semibold">SELVA</strong> - Vetroresina e pneumatici</span>
+                          </motion.li>
+                        </ul>
+                      </div>
+                    </Card>
+                  </motion.div>
+
+                  {/* Elettronica */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <Card className="group relative h-full min-h-[400px] sm:min-h-[450px] overflow-hidden border-0 transition-all hover:shadow-2xl focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 cursor-pointer">
+                      {/* Full image background */}
+                      <div className="absolute inset-0">
+                        <Image
+                          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80"
+                          alt="Elettronica nautica"
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          loading="lazy"
+                          quality={85}
+                        />
+                      </div>
+                      
+                      {/* Dark overlay for text readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/40 group-hover:from-black/98 group-hover:via-black/80 transition-all duration-300" />
+                      
+                      {/* Content overlay */}
+                      <div className="relative h-full flex flex-col justify-end p-6 sm:p-8 text-white z-10">
+                        <CardTitle className="text-lg font-bold mb-3 sm:text-xl lg:text-2xl text-white drop-shadow-lg">
+                          Elettronica
+                        </CardTitle>
+                        <ul className="space-y-2" aria-label="Marchi elettronica">
+                          <motion.li
+                            className="flex items-start gap-2 text-xs sm:text-sm"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                          >
+                            <CheckCircle2
+                              className="mt-0.5 h-3 w-3 shrink-0 text-white sm:h-4 sm:w-4"
+                              aria-hidden="true"
+                            />
+                            <span className="text-white/90 drop-shadow-sm"><strong className="font-semibold">HUMMINBIRD</strong> - Rivenditori autorizzati</span>
+                          </motion.li>
+                          <motion.li
+                            className="flex items-start gap-2 text-xs sm:text-sm"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                          >
+                            <CheckCircle2
+                              className="mt-0.5 h-3 w-3 shrink-0 text-white sm:h-4 sm:w-4"
+                              aria-hidden="true"
+                            />
+                            <span className="text-white/90 drop-shadow-sm"><strong className="font-semibold">MINNKOTA</strong> - Rivenditori autorizzati</span>
+                          </motion.li>
+                        </ul>
+                      </div>
+                    </Card>
               </motion.div>
+                </div>
+              </StaggerContainer>
             </div>
           </FadeIn>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section
-        className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-primary/10 to-background py-12 sm:py-16 md:py-24"
-        aria-labelledby="cta-heading"
-      >
-        {/* Animated background */}
-        <div className="absolute inset-0 -z-10">
-          <motion.div
-            className="absolute bottom-0 right-0 h-64 w-64 rounded-full bg-primary/10 blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        </div>
 
-        <div className="container px-4 sm:px-6 lg:px-8">
-          <div className="relative mx-auto max-w-3xl">
-            <motion.div
-              className="rounded-2xl border-2 border-primary/20 bg-background/50 p-8 backdrop-blur-sm sm:p-12 md:p-16"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <ScaleIn delay={0.2}>
-                <div className="mb-6 flex justify-center">
-                  <motion.div
-                    className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary/80 shadow-lg shadow-primary/20 sm:h-20 sm:w-20"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <Star
-                      className="h-8 w-8 text-primary-foreground sm:h-10 sm:w-10"
-                      aria-hidden="true"
-                    />
-                  </motion.div>
-                </div>
-              </ScaleIn>
-
-              <FadeIn delay={0.3}>
-                <h2
-                  id="cta-heading"
-                  className="mb-4 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl text-center"
-                >
-                  Pronto a Vivere l'Esperienza Nautica?
-                </h2>
-              </FadeIn>
-
-              <FadeIn delay={0.4}>
-                <p className="mb-8 text-base text-center leading-relaxed text-muted-foreground sm:text-lg">
-                  Contattaci oggi stesso per una consulenza gratuita o per
-                  prenotare un servizio. Siamo qui per aiutarti.
-                </p>
-              </FadeIn>
-
-              <FadeIn delay={0.5}>
-                <div className="flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    className="flex-1 sm:flex-initial"
-                  >
-                    <Button
-                      asChild
-                      size="lg"
-                      className="w-full text-sm shadow-lg shadow-primary/30 sm:text-base focus-visible:ring-2 focus-visible:ring-offset-2"
-                    >
-                      <Link href="/contatti" aria-label="Contattaci ora">
-                        Contattaci Ora
-                        <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                      </Link>
-                    </Button>
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    className="flex-1 sm:flex-initial"
-                  >
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="lg"
-                      className="w-full text-sm sm:text-base focus-visible:ring-2 focus-visible:ring-offset-2"
-                    >
-                      <Link href="/offerte" aria-label="Vedi le nostre offerte">
-                        Vedi le Offerte
-                      </Link>
-                    </Button>
-                  </motion.div>
-                </div>
-              </FadeIn>
-
-              {/* Trust indicators */}
-              <FadeIn delay={0.6}>
-                <div className="mt-10 flex flex-wrap items-center justify-center gap-6 border-t pt-8 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-5 w-5 text-primary" aria-hidden="true" />
-                    <span>Consulenza Gratuita</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-5 w-5 text-primary" aria-hidden="true" />
-                    <span>Preventivo Immediato</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-5 w-5 text-primary" aria-hidden="true" />
-                    <span>Assistenza H24</span>
-                  </div>
-                </div>
-              </FadeIn>
-            </motion.div>
-          </div>
-        </div>
-      </section>
     </div>
+    </>
   )
 }

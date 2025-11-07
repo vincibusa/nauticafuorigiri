@@ -2,7 +2,8 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { usePathname } from "next/navigation"
+import { useState, useEffect, useRef } from "react"
 import { Menu } from "lucide-react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
@@ -16,16 +17,81 @@ import {
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "Servizi", href: "/servizi" },
-  { name: "Contatti", href: "/contatti" },
-  { name: "Biografia", href: "/biografia" },
-  { name: "Photo Gallery", href: "/photo-gallery" },
+  { name: "Chi Siamo", href: "/chi-siamo" },
+  { name: "Servizi", href: "/#servizi" },
   { name: "Offerte", href: "/offerte" },
-  { name: "Testimonianze", href: "/testimonianze" },
+  { name: "Contatti", href: "/contatti" },
 ]
 
 export function Header() {
   const [open, setOpen] = useState(false)
+  const [hash, setHash] = useState("")
+  const pathname = usePathname()
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  useEffect(() => {
+    // Update hash when it changes
+    const handleHashChange = () => {
+      setHash(window.location.hash)
+    }
+    
+    // Set initial hash
+    setHash(window.location.hash)
+    
+    // Listen for hash changes
+    window.addEventListener("hashchange", handleHashChange)
+    
+    // Also listen for scroll to detect when we're in servizi section
+    const handleScroll = () => {
+      if (pathname === "/") {
+        // Clear any existing timeout
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current)
+        }
+        
+        // Debounce scroll handling
+        scrollTimeoutRef.current = setTimeout(() => {
+          const serviziSection = document.getElementById("servizi")
+          if (serviziSection) {
+            const rect = serviziSection.getBoundingClientRect()
+            const isVisible = rect.top <= 150 && rect.bottom >= 100
+            const currentHash = window.location.hash
+            
+            if (isVisible && currentHash !== "#servizi") {
+              window.history.replaceState(null, "", "/#servizi")
+              setHash("#servizi")
+            } else if (!isVisible && currentHash === "#servizi" && window.scrollY < serviziSection.offsetTop - 200) {
+              window.history.replaceState(null, "", "/")
+              setHash("")
+            }
+          }
+        }, 100)
+      }
+    }
+    
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange)
+      window.removeEventListener("scroll", handleScroll)
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current)
+      }
+    }
+  }, [pathname])
+
+  const isActive = (href: string) => {
+    if (href === "/") {
+      // Home is active only if we're on homepage AND not on servizi section
+      return pathname === "/" && hash !== "#servizi"
+    }
+    // Handle anchor links
+    if (href.startsWith("/#")) {
+      const anchor = href.substring(1)
+      return pathname === "/" && hash === anchor
+    }
+    return pathname.startsWith(href)
+  }
 
   return (
     <motion.header
@@ -71,16 +137,45 @@ export function Header() {
             >
               <Link
                 href={item.href}
-                className="relative px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
+                onClick={(e) => {
+                  if (item.href.startsWith("/#")) {
+                    e.preventDefault()
+                    const anchor = item.href.substring(1)
+                    if (pathname !== "/") {
+                      window.location.href = item.href
+                    } else {
+                      const element = document.querySelector(anchor)
+                      if (element) {
+                        element.scrollIntoView({ behavior: "smooth", block: "start" })
+                      }
+                    }
+                  }
+                }}
+                className={`relative px-3 py-2 text-sm font-medium transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm ${
+                  isActive(item.href)
+                    ? "text-foreground"
+                    : "text-muted-foreground"
+                }`}
                 aria-label={`Vai alla pagina ${item.name}`}
+                aria-current={isActive(item.href) ? "page" : undefined}
               >
                 {item.name}
-                <motion.span
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.2 }}
-                />
+                {isActive(item.href) && (
+                  <motion.span
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                    layoutId="activeTab"
+                    initial={false}
+                    transition={{ duration: 0.2 }}
+                  />
+                )}
+                {!isActive(item.href) && (
+                  <motion.span
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.2 }}
+                  />
+                )}
               </Link>
             </motion.div>
           ))}
@@ -134,9 +229,32 @@ export function Header() {
                 >
                   <Link
                     href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="block text-base font-medium text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm py-3 px-4"
+                    onClick={(e) => {
+                      if (item.href.startsWith("/#")) {
+                        e.preventDefault()
+                        const anchor = item.href.substring(1)
+                        setOpen(false)
+                        if (pathname !== "/") {
+                          window.location.href = item.href
+                        } else {
+                          setTimeout(() => {
+                            const element = document.querySelector(anchor)
+                            if (element) {
+                              element.scrollIntoView({ behavior: "smooth", block: "start" })
+                            }
+                          }, 100)
+                        }
+                      } else {
+                        setOpen(false)
+                      }
+                    }}
+                    className={`block text-base font-medium transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm py-3 px-4 ${
+                      isActive(item.href)
+                        ? "text-primary font-semibold"
+                        : "text-foreground"
+                    }`}
                     aria-label={`Vai alla pagina ${item.name}`}
+                    aria-current={isActive(item.href) ? "page" : undefined}
                   >
                     {item.name}
                   </Link>
@@ -149,4 +267,3 @@ export function Header() {
     </motion.header>
   )
 }
-

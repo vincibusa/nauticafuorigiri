@@ -1,56 +1,82 @@
 "use client"
 
 import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Phone, Mail, MapPin, Send, CheckCircle2, Clock } from "lucide-react"
+import { Phone, Mail, MapPin, Send, CheckCircle2, Clock, AlertCircle } from "lucide-react"
 import { FadeIn, StaggerContainer } from "@/components/animations"
 import { motion } from "framer-motion"
+import { contactFormSchema, type ContactFormData } from "@/lib/validations"
+import dynamic from "next/dynamic"
+
+// Carica la mappa solo lato client per evitare problemi SSR
+const DynamicMap = dynamic(() => import("@/components/map").then((mod) => ({ default: mod.Map })), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-[400px] w-full items-center justify-center rounded-lg bg-muted">
+      <div className="text-center">
+        <MapPin className="mx-auto mb-2 h-8 w-8 animate-pulse text-muted-foreground" />
+        <p className="text-sm text-muted-foreground">Caricamento mappa...</p>
+      </div>
+    </div>
+  ),
+})
 
 export default function ContattiPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  })
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // In a real app, you would send this to an API
-    console.log("Form submitted:", formData)
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
-      setFormData({ name: "", email: "", phone: "", message: "" })
-    }, 3000)
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+    mode: "onBlur",
+  })
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true)
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.message || "Errore durante l'invio del messaggio")
+      }
+
+      setSubmitted(true)
+      reset()
+      setTimeout(() => {
+        setSubmitted(false)
+      }, 5000)
+    } catch (error) {
+      console.error("Error submitting form:", error)
+      // In a real app, you might want to show an error toast here
+      alert(error instanceof Error ? error.message : "Errore durante l'invio del messaggio")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
     <div className="container px-4 py-8 sm:py-12 md:py-20 sm:px-6 lg:px-8">
       <FadeIn>
         <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
-          <motion.div
-            className="mb-4 inline-block"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
-            <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-              <Phone className="h-4 w-4" aria-hidden="true" />
-              Contattaci
-            </span>
-          </motion.div>
+
           <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             Contatti
           </h1>
@@ -222,8 +248,11 @@ export default function ContattiPage() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     className="flex flex-col items-center justify-center py-8 text-center sm:py-12"
+                    role="status"
+                    aria-live="polite"
+                    aria-atomic="true"
                   >
-                    <CheckCircle2 className="mb-4 h-12 w-12 text-primary sm:h-16 sm:w-16" />
+                    <CheckCircle2 className="mb-4 h-12 w-12 text-primary sm:h-16 sm:w-16" aria-hidden="true" />
                     <h3 className="mb-2 text-lg font-semibold sm:text-xl">
                       Messaggio Inviato!
                     </h3>
@@ -233,88 +262,145 @@ export default function ContattiPage() {
                   </motion.div>
                 ) : (
                   <form
-                    onSubmit={handleSubmit}
+                    onSubmit={handleSubmit(onSubmit)}
                     className="space-y-4 sm:space-y-6"
                     aria-label="Form di contatto"
+                    noValidate
                   >
                     <div className="space-y-2">
                       <Label htmlFor="name" className="text-sm sm:text-base">
-                        Nome e Cognome
+                        Nome e Cognome <span className="text-destructive" aria-label="campo obbligatorio">*</span>
                       </Label>
                       <Input
                         id="name"
-                        name="name"
                         type="text"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
+                        {...register("name")}
                         placeholder="Mario Rossi"
-                        className="text-sm sm:text-base"
+                        className={`text-sm sm:text-base ${
+                          errors.name ? "border-destructive focus-visible:ring-destructive" : ""
+                        }`}
                         aria-required="true"
+                        aria-invalid={errors.name ? "true" : "false"}
+                        aria-describedby={errors.name ? "name-error" : undefined}
                       />
+                      {errors.name && (
+                        <p
+                          id="name-error"
+                          className="flex items-center gap-1 text-xs text-destructive sm:text-sm"
+                          role="alert"
+                        >
+                          <AlertCircle className="h-3 w-3 shrink-0" aria-hidden="true" />
+                          {errors.name.message}
+                        </p>
+                      )}
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="email" className="text-sm sm:text-base">
-                        Email
+                        Email <span className="text-destructive" aria-label="campo obbligatorio">*</span>
                       </Label>
                       <Input
                         id="email"
-                        name="email"
                         type="email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
+                        {...register("email")}
                         placeholder="mario.rossi@example.com"
-                        className="text-sm sm:text-base"
+                        className={`text-sm sm:text-base ${
+                          errors.email ? "border-destructive focus-visible:ring-destructive" : ""
+                        }`}
                         aria-required="true"
+                        aria-invalid={errors.email ? "true" : "false"}
+                        aria-describedby={errors.email ? "email-error" : undefined}
                       />
+                      {errors.email && (
+                        <p
+                          id="email-error"
+                          className="flex items-center gap-1 text-xs text-destructive sm:text-sm"
+                          role="alert"
+                        >
+                          <AlertCircle className="h-3 w-3 shrink-0" aria-hidden="true" />
+                          {errors.email.message}
+                        </p>
+                      )}
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="phone" className="text-sm sm:text-base">
-                        Telefono
+                        Telefono <span className="text-muted-foreground text-xs">(opzionale)</span>
                       </Label>
                       <Input
                         id="phone"
-                        name="phone"
                         type="tel"
-                        value={formData.phone}
-                        onChange={handleChange}
+                        {...register("phone")}
                         placeholder="+39 123 456 7890"
-                        className="text-sm sm:text-base"
+                        className={`text-sm sm:text-base ${
+                          errors.phone ? "border-destructive focus-visible:ring-destructive" : ""
+                        }`}
+                        aria-invalid={errors.phone ? "true" : "false"}
+                        aria-describedby={errors.phone ? "phone-error" : undefined}
                       />
+                      {errors.phone && (
+                        <p
+                          id="phone-error"
+                          className="flex items-center gap-1 text-xs text-destructive sm:text-sm"
+                          role="alert"
+                        >
+                          <AlertCircle className="h-3 w-3 shrink-0" aria-hidden="true" />
+                          {errors.phone.message}
+                        </p>
+                      )}
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="message" className="text-sm sm:text-base">
-                        Messaggio
+                        Messaggio <span className="text-destructive" aria-label="campo obbligatorio">*</span>
                       </Label>
                       <Textarea
                         id="message"
-                        name="message"
-                        required
-                        value={formData.message}
-                        onChange={handleChange}
+                        {...register("message")}
                         placeholder="Scrivi qui il tuo messaggio..."
                         rows={6}
-                        className="text-sm sm:text-base"
+                        className={`text-sm sm:text-base ${
+                          errors.message ? "border-destructive focus-visible:ring-destructive" : ""
+                        }`}
                         aria-required="true"
+                        aria-invalid={errors.message ? "true" : "false"}
+                        aria-describedby={errors.message ? "message-error" : undefined}
                       />
+                      {errors.message && (
+                        <p
+                          id="message-error"
+                          className="flex items-center gap-1 text-xs text-destructive sm:text-sm"
+                          role="alert"
+                        >
+                          <AlertCircle className="h-3 w-3 shrink-0" aria-hidden="true" />
+                          {errors.message.message}
+                        </p>
+                      )}
                     </div>
 
                     <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                      whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                       transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     >
                       <Button
                         type="submit"
                         size="lg"
-                        className="w-full text-sm shadow-lg shadow-primary/20 sm:text-base focus-visible:ring-2 focus-visible:ring-offset-2"
+                        disabled={isSubmitting}
+                        className="w-full text-sm shadow-lg shadow-primary/20 sm:text-base focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                        aria-busy={isSubmitting}
                       >
-                        Invia Messaggio
-                        <Send className="ml-2 h-4 w-4" aria-hidden="true" />
+                        {isSubmitting ? (
+                          <>
+                            <Clock className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
+                            Invio in corso...
+                          </>
+                        ) : (
+                          <>
+                            Invia Messaggio
+                            <Send className="ml-2 h-4 w-4" aria-hidden="true" />
+                          </>
+                        )}
                       </Button>
                     </motion.div>
                   </form>
@@ -325,6 +411,48 @@ export default function ContattiPage() {
           </FadeIn>
         </div>
       </StaggerContainer>
+
+      {/* Map Section */}
+      <FadeIn delay={0.4}>
+        <div className="mt-12 sm:mt-16">
+          <motion.div
+            className="mb-8 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            <motion.div
+              className="mb-4 inline-block"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+            >
+              <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
+                <MapPin className="h-4 w-4" aria-hidden="true" />
+                Come Raggiungerci
+              </span>
+            </motion.div>
+            <h2 className="mb-4 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
+              La Nostra Posizione
+            </h2>
+            <p className="text-base text-muted-foreground sm:text-lg">
+              Vieni a trovarci nella nostra sede a Canino (VT)
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
+            className="overflow-hidden rounded-lg border-2 shadow-xl"
+          >
+            <DynamicMap
+              latitude={42.4650}
+              longitude={11.7500}
+              address="Strada vicinale di Orbetello snc, Canino (VT) 01011"
+            />
+          </motion.div>
+        </div>
+      </FadeIn>
     </div>
   )
 }

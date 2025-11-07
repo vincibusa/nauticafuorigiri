@@ -117,13 +117,6 @@ export function Footer() {
                   Offerte
                 </Link>
                 <Link
-                  href="/testimonianze"
-                  className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm w-fit"
-                  aria-label="Vai alla pagina Testimonianze"
-                >
-                  Testimonianze
-                </Link>
-                <Link
                   href="/contatti"
                   className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm w-fit"
                   aria-label="Vai alla pagina Contatti"
