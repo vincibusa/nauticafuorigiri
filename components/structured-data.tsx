@@ -121,7 +121,7 @@ export function ServiceSchema({
 }
 
 // BreadcrumbList schema
-export function BreadcrumbSchema(items: { name: string; url: string }[]) {
+export function BreadcrumbSchema({ items }: { items: { name: string; url: string }[] }) {
   if (!items || !Array.isArray(items) || items.length === 0) {
     return null
   }

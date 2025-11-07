@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
         {
           success: false,
           message: "Dati non validi",
-          errors: error.errors,
+          errors: error.issues,
         },
         { status: 400 }
       )
