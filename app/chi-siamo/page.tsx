@@ -342,7 +342,7 @@ export default function BiografiaPage() {
                           aria-hidden="true"
                         />
                         <h3 className="mb-2 text-lg font-semibold">Struttura Coperta</h3>
-                        <p className="text-2xl font-bold text-primary">250 mq</p>
+                        <p className="text-2xl font-bold text-primary">410 mq</p>
                         <p className="mt-2 text-sm text-muted-foreground">
                           Officina e rimessaggio al coperto
                         </p>
@@ -352,7 +352,7 @@ export default function BiografiaPage() {
                       <h3 className="mb-3 text-lg font-semibold">Rimessaggio</h3>
                       <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
                         Servizio di rimessaggio sia al coperto che all'esterno. Disponiamo di
-                        una struttura coperta di 250 mq per officina e rimessaggio, più 2
+                        una struttura coperta di 410 mq per officina e rimessaggio, più 2
                         strutture esterne per rimessaggio al chiuso.
                       </p>
                     </div>

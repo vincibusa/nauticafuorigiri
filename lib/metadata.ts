@@ -11,12 +11,14 @@ export function createMetadata({
   path = "",
   image = "/hero.jpg",
   keywords,
+  noIndex = false,
 }: {
   title: string
   description: string
   path?: string
   image?: string
   keywords?: string[]
+  noIndex?: boolean
 }): Metadata {
   const fullTitle = `${title} | ${siteName}`
   const url = `${siteUrl}${path}`
@@ -65,11 +67,11 @@ export function createMetadata({
       images: [imageUrl],
     },
     robots: {
-      index: true,
-      follow: true,
+      index: !noIndex,
+      follow: !noIndex,
       googleBot: {
-        index: true,
-        follow: true,
+        index: !noIndex,
+        follow: !noIndex,
         "max-video-preview": -1,
         "max-image-preview": "large",
         "max-snippet": -1,

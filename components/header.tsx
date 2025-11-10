@@ -102,26 +102,26 @@ export function Header() {
       role="banner"
     >
       <div className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link
-          href="/"
-          className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
-          aria-label="Nautica Fuorigiri - Torna alla home"
-        >
-          <motion.div
-            className="relative h-10 w-10 sm:h-12 sm:w-12"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Image
-              src="/logo.png"
-              alt="Logo Nautica Fuorigiri"
-              fill
-              sizes="48px"
-              className="object-contain drop-shadow-[0_0_12px_rgba(37,99,235,0.35)]"
-              priority
-            />
-          </motion.div>
-        </Link>
+            <Link
+              href="/"
+              className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
+              aria-label="Nautica Fuorigiri - Torna alla home"
+            >
+              <motion.div
+                className="relative h-12 w-12 sm:h-16 sm:w-16"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Image
+                  src="/logo.png"
+                  alt="Logo Nautica Fuorigiri"
+                  fill
+                  sizes="64px"
+                  className="object-contain drop-shadow-[0_0_12px_rgba(37,99,235,0.35)]"
+                  priority
+                />
+              </motion.div>
+            </Link>
 
         {/* Desktop Navigation */}
         <nav

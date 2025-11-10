@@ -12,13 +12,13 @@ const offers = [
   {
     title: "Rimessaggio Invernale",
     description:
-      "Prenota ora il rimessaggio per l'inverno a partire da soli 50 euro al mese. Disponiamo di terreno di 30.000 mq con struttura coperta di 250 mq e 2 strutture esterne per rimessaggio al chiuso. La promozione è valida soltanto se viene lasciato un corrispettivo per un servizio di manutenzione.",
+      "Prenota ora il rimessaggio per l'inverno a partire da soli 50 euro al mese. Disponiamo di terreno di 30.000 mq con struttura coperta di 410 mq e 2 strutture esterne per rimessaggio al chiuso. La promozione è valida soltanto se viene lasciato un corrispettivo per un servizio di manutenzione.",
     price: "da 50€/mese",
     badge: "Promozione",
     features: [
       "Rimessaggio coperto ed esterno",
       "Terreno di 30.000 mq",
-      "Struttura coperta 250 mq",
+      "Struttura coperta 410 mq",
       "2 strutture esterne per rimessaggio",
       "Manutenzione durante il ricovero",
       "Prezzo speciale per prenotazioni anticipate",
@@ -42,16 +42,20 @@ const offers = [
     color: "from-blue-500/10 to-cyan-500/10",
   },
   {
-    title: "Assistenza Mobile",
+    title: "Vendita Imbarcazioni e Motori",
     description:
-      "Servizio di assistenza mobile in tutta Italia. Portiamo la nostra professionalità direttamente da te.",
+      "Vendita di imbarcazioni e motori nuovi e usati. Siamo concessionari autorizzati dei migliori marchi del settore nautico. Ampia gamma di barche e motori disponibili.",
     price: "Su preventivo",
     badge: "Disponibile",
     features: [
-      "Interventi in tutta Italia",
-      "Officina mobile attrezzata",
-      "Interventi rapidi ed efficienti",
-      "Preventivo gratuito",
+      "Imbarcazioni nuove e usate",
+      "Motori nautici di tutte le marche",
+      "Concessionari autorizzati",
+      "Assistenza post-vendita",
+      "Finanziamenti disponibili",
+      "Valutazione usato",
+      "Consegna in tutta Italia",
+      "Configurazioni personalizzate sulle imbarcazioni",
     ],
     highlight: false,
     color: "from-indigo-500/10 to-violet-500/10",
