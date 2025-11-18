@@ -331,7 +331,7 @@ export default function Home() {
                       {/* Full image background */}
                       <div className="absolute inset-0">
                         <Image
-                          src="/rip-motori.jpeg"
+                          src="/yanmar.jpg"
                           alt="Motori nautici"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -362,6 +362,19 @@ export default function Home() {
                               aria-hidden="true"
                             />
                             <span className="text-white/90 drop-shadow-sm"><strong className="font-semibold">MERCURY</strong> - Motori fuoribordo benzina ed elettrici</span>
+                          </motion.li>
+                          <motion.li
+                            className="flex items-start gap-2 text-xs sm:text-sm"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                          >
+                            <CheckCircle2
+                              className="mt-0.5 h-3 w-3 shrink-0 text-white sm:h-4 sm:w-4"
+                              aria-hidden="true"
+                            />
+                            <span className="text-white/90 drop-shadow-sm"><strong className="font-semibold">YANMAR</strong> - Motori fuoribordo benzina ed elettrici</span>
                           </motion.li>
                           <motion.li
                             className="flex items-start gap-2 text-xs sm:text-sm"

@@ -160,7 +160,7 @@ export const services: Service[] = [
         "Ricambi originali e di qualità garantita",
         "Diagnostica computerizzata avanzata",
         "Rifacimenti completi con garanzia",
-        "Concessionari autorizzati MERCURY, MERCRUISER, SELVA",
+        "Concessionari autorizzati MERCURY, MERCRUISER, SELVA, YANMAR",
         "Esperienza su tutte le marche",
       ],
       process: {
