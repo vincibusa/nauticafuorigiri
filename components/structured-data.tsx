@@ -1,7 +1,7 @@
 import { siteUrl } from "@/lib/metadata"
 
 interface StructuredDataProps {
-  type: "LocalBusiness" | "Service" | "Organization" | "BreadcrumbList"
+  type: "LocalBusiness" | "Service" | "Organization" | "BreadcrumbList" | "WebSite"
   data: Record<string, any>
 }
 
@@ -136,6 +136,33 @@ export function BreadcrumbSchema({ items }: { items: { name: string; url: string
           name: item.name,
           item: `${siteUrl}${item.url}`,
         })),
+      }}
+    />
+  )
+}
+
+// WebSite schema con search action
+export function WebSiteSchema() {
+  return (
+    <StructuredData
+      type="WebSite"
+      data={{
+        name: "Nautica Fuorigiri",
+        url: siteUrl,
+        description: "Servizi nautici professionali: riparazione motori, manutenzione imbarcazioni, trasporto, rimessaggio. Concessionari autorizzati MERCURY, MERCRUISER, SELVA.",
+        publisher: {
+          "@type": "Organization",
+          name: "Nautica Fuorigiri",
+          logo: `${siteUrl}/logo.png`,
+        },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${siteUrl}/cerca?q={search_term_string}`,
+          },
+          "query-input": "required name=search_term_string",
+        },
       }}
     />
   )

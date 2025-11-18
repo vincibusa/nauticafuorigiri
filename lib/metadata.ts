@@ -40,9 +40,21 @@ export function createMetadata({
     authors: [{ name: siteName }],
     creator: siteName,
     publisher: siteName,
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
     metadataBase: new URL(siteUrl),
     alternates: {
       canonical: url,
+    },
+    other: {
+      "author": siteName,
+      "application-name": siteName,
+      "theme-color": "#2563eb", // primary color
+      "color-scheme": "light dark",
+      "msapplication-TileColor": "#2563eb",
     },
     openGraph: {
       type: "website",

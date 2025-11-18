@@ -13,7 +13,7 @@ export function Footer() {
       aria-label="Footer"
     >
       <div className="container px-4 py-8 sm:py-12 md:py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 md:grid-cols-4">
           {/* Company Info */}
           <FadeIn>
             <div className="space-y-4">
@@ -126,9 +126,37 @@ export function Footer() {
               </nav>
             </div>
           </FadeIn>
+
+          {/* Legal Links */}
+          <FadeIn delay={0.3}>
+            <div className="space-y-4">
+              <h3 className="text-base font-semibold sm:text-lg">
+                Informazioni Legali
+              </h3>
+              <nav
+                className="flex flex-col space-y-2 text-xs sm:text-sm"
+                aria-label="Informazioni legali"
+              >
+                <Link
+                  href="/privacy"
+                  className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm w-fit"
+                  aria-label="Vai alla Privacy Policy"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  href="/cookie"
+                  className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm w-fit"
+                  aria-label="Vai alla Cookie Policy"
+                >
+                  Cookie Policy
+                </Link>
+              </nav>
+            </div>
+          </FadeIn>
         </div>
 
-        <FadeIn delay={0.3}>
+        <FadeIn delay={0.4}>
           <div className="mt-8 border-t pt-6 text-center text-xs text-muted-foreground sm:mt-12 sm:pt-8 sm:text-sm">
             <p>
               © {new Date().getFullYear()} Nautica Fuorigiri. Tutti i diritti

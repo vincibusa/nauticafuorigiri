@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Phone, Mail, MapPin, Send, CheckCircle2, Clock, AlertCircle } from "lucide-react"
 import { FadeIn, StaggerContainer } from "@/components/animations"
 import { motion } from "framer-motion"
@@ -374,6 +375,48 @@ export default function ContattiPage() {
                         >
                           <AlertCircle className="h-3 w-3 shrink-0" aria-hidden="true" />
                           {errors.message.message}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Privacy Consent */}
+                    <div className="space-y-3">
+                      <div className="flex items-start space-x-2">
+                        <Checkbox
+                          id="privacyConsent"
+                          {...register("privacyConsent")}
+                          className="mt-1"
+                          aria-required="true"
+                        />
+                        <div className="grid gap-1.5 leading-none">
+                          <Label
+                            htmlFor="privacyConsent"
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          >
+                            Acconsento al trattamento dei dati personali{" "}
+                            <span className="text-destructive" aria-label="campo obbligatorio">*</span>
+                          </Label>
+                          <p className="text-xs text-muted-foreground">
+                            Dichiaro di aver letto e compreso l'
+                            <a
+                              href="/privacy"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
+                            >
+                              informativa sulla privacy
+                            </a>{" "}
+                            e acconsento al trattamento dei miei dati personali per le finalità indicate.
+                          </p>
+                        </div>
+                      </div>
+                      {errors.privacyConsent && (
+                        <p
+                          className="flex items-center gap-1 text-xs text-destructive sm:text-sm"
+                          role="alert"
+                        >
+                          <AlertCircle className="h-3 w-3 shrink-0" aria-hidden="true" />
+                          {errors.privacyConsent.message}
                         </p>
                       )}
                     </div>

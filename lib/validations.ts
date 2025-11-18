@@ -22,6 +22,9 @@ export const contactFormSchema = z.object({
     .string()
     .min(10, "Il messaggio deve contenere almeno 10 caratteri")
     .max(1000, "Il messaggio non può superare i 1000 caratteri"),
+  privacyConsent: z
+    .boolean()
+    .refine((val) => val === true, "Devi accettare l'informativa sulla privacy per procedere"),
 })
 
 export type ContactFormData = z.infer<typeof contactFormSchema>

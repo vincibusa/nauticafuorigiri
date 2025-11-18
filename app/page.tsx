@@ -7,13 +7,14 @@ import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardTitle, CardHeader, CardContent } from "@/components/ui/card"
 import { Anchor, Wrench, Calendar, Shield, Star, ArrowRight, Waves, CheckCircle, Truck, CheckCircle2, Award, Ship } from "lucide-react"
 import { FadeIn, StaggerContainer, SlideUp, ScaleIn } from "@/components/animations"
-import { LocalBusinessSchema, OrganizationSchema, ServiceSchema } from "@/components/structured-data"
+import { LocalBusinessSchema, OrganizationSchema, ServiceSchema, WebSiteSchema } from "@/components/structured-data"
 import { services } from "@/lib/services"
 
 export default function Home() {
 
   return (
     <>
+      <WebSiteSchema />
       <LocalBusinessSchema />
       <OrganizationSchema />
       <ServiceSchema

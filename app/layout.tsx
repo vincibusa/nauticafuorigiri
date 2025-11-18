@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { CookieBanner } from "@/components/cookie-banner";
 import { createMetadata } from "@/lib/metadata"
 
 const geistSans = Geist({
@@ -61,6 +62,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </div>
+        <CookieBanner />
       </body>
     </html>
   );
