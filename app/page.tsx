@@ -5,7 +5,8 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardTitle, CardHeader, CardContent } from "@/components/ui/card"
-import { Anchor, Wrench, Calendar, Shield, Star, ArrowRight, Waves, CheckCircle, Truck, CheckCircle2, Award, Ship } from "lucide-react"
+import { Separator } from "@/components/ui/separator"
+import { Anchor, Wrench, Calendar, Star, ArrowRight, Waves, CheckCircle, Truck, CheckCircle2, Award, Ship, Heart, MapPin, Building2 } from "lucide-react"
 import { FadeIn, StaggerContainer, SlideUp, ScaleIn } from "@/components/animations"
 import { LocalBusinessSchema, OrganizationSchema, ServiceSchema, WebSiteSchema } from "@/components/structured-data"
 import { services } from "@/lib/services"
@@ -159,6 +160,124 @@ export default function Home() {
                 </motion.div>
               </div>
             </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* Chi Siamo Section */}
+      <section
+        id="chi-siamo"
+        className="relative py-12 sm:py-20 md:py-32"
+      >
+        <div className="container px-4 py-8 sm:py-12 md:py-20 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            {/* Main Story Section */}
+            <section className="mb-16 sm:mb-20">
+              <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
+                <FadeIn>
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-2xl">
+                    <Image
+                      src="/pass.jpeg"
+                      alt="Passione per la nautica"
+                      fill
+                      className="object-cover object-center object-[50%_50%]" 
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      quality={85}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  </div>
+                </FadeIn>
+                <FadeIn delay={0.2}>
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-3">
+                      <motion.div
+                        className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10"
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <Heart className="h-6 w-6 text-primary" aria-hidden="true" />
+                      </motion.div>
+                      <h2 className="text-2xl font-bold sm:text-3xl">La Nostra Passione</h2>
+                    </div>
+                    <div className="prose prose-lg max-w-none">
+                      <p className="text-lg leading-relaxed text-muted-foreground sm:text-xl">
+                        Nautica Fuorigiri nasce da una passione autentica per le barche, i motori e tutto ciò che ruota intorno alla navigazione. Qui ogni intervento è fatto con cura, ogni cliente è ascoltato, ogni dettaglio conta.
+                      </p>
+                      <p className="text-lg leading-relaxed text-muted-foreground sm:text-xl mt-4">
+                        Guidato da Andrea, il cantiere è il frutto di anni di esperienza sul campo, di notti passate a cercare la soluzione giusta, e di giorni vissuti tra officina, pontili e prove in acqua. Non vendiamo sogni: li mettiamo in moto.
+                      </p>
+                    </div>
+                  </div>
+                </FadeIn>
+              </div>
+            </section>
+
+
+            {/* Structure Section */}
+            <section className="mb-16 sm:mb-20">
+              <FadeIn delay={0.3}>
+                <div className="mb-12 text-center">
+                  <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+                    Strutture e Spazi
+                  </h2>
+                </div>
+              </FadeIn>
+
+              <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
+                <FadeIn>
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl">
+                    <Image
+                      src="/rimessaggio.jpeg"
+                      alt="Struttura Nautica Fuorigiri"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      quality={85}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  </div>
+                </FadeIn>
+                <FadeIn delay={0.2}>
+                  <div className="space-y-6">
+                    <div className="space-y-6">
+                      <div className="grid gap-6 sm:grid-cols-2">
+                        <div className="p-6">
+                          <MapPin
+                            className="mb-3 h-8 w-8 text-primary"
+                            aria-hidden="true"
+                          />
+                          <h3 className="mb-2 text-lg font-semibold">Terreno</h3>
+                          <p className="text-2xl font-bold text-primary">30.000 mq</p>
+                          <p className="mt-2 text-sm text-muted-foreground">
+                            Spazio totale per lavorazioni e rimessaggio
+                          </p>
+                        </div>
+                        <div className=" p-6">
+                          <Building2
+                            className="mb-3 h-8 w-8 text-primary"
+                            aria-hidden="true"
+                          />
+                          <h3 className="mb-2 text-lg font-semibold">Struttura Coperta</h3>
+                          <p className="text-2xl font-bold text-primary">410 mq</p>
+                          <p className="mt-2 text-sm text-muted-foreground">
+                            Officina e rimessaggio al coperto
+                          </p>
+                        </div>
+                      </div>
+                      <div className=" p-6">
+                        <h3 className="mb-3 text-lg font-semibold">Rimessaggio</h3>
+                        <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+                          Servizio di rimessaggio sia al coperto che all'esterno. Disponiamo di
+                          una struttura coperta di 410 mq per officina e rimessaggio, più 2
+                          strutture esterne per rimessaggio al chiuso.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </FadeIn>
+              </div>
+            </section>
+
           </div>
         </div>
       </section>

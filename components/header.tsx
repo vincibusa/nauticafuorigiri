@@ -17,7 +17,7 @@ import {
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "Chi Siamo", href: "/chi-siamo" },
+  { name: "Chi Siamo", href: "/#chi-siamo" },
   { name: "Servizi", href: "/#servizi" },
   { name: "Offerte", href: "/offerte" },
   { name: "Contatti", href: "/contatti" },
@@ -108,7 +108,7 @@ export function Header() {
               aria-label="Nautica Fuorigiri - Torna alla home"
             >
               <motion.div
-                className="relative h-12 w-12 sm:h-16 sm:w-16"
+                className="relative h-16 w-16 sm:h-20 sm:w-20"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -116,7 +116,7 @@ export function Header() {
                   src="/logo.png"
                   alt="Logo Nautica Fuorigiri"
                   fill
-                  sizes="64px"
+                  sizes="96px"
                   className="object-contain drop-shadow-[0_0_12px_rgba(37,99,235,0.35)]"
                   priority
                 />
@@ -201,7 +201,7 @@ export function Header() {
           >
             <SheetHeader className="space-y-4">
               <motion.div
-                className="relative h-10 w-10"
+                className="relative h-14 w-14"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3 }}
@@ -210,7 +210,7 @@ export function Header() {
                   src="/logo.png"
                   alt="Logo Nautica Fuorigiri"
                   fill
-                  sizes="40px"
+                  sizes="56px"
                   className="object-contain drop-shadow-[0_0_12px_rgba(37,99,235,0.35)]"
                 />
               </motion.div>
