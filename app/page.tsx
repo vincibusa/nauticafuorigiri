@@ -78,7 +78,7 @@ export default function Home() {
             <SlideUp delay={0.2}>
               <div className="mb-6 flex justify-center">
                 <motion.div
-                  className="relative h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40 lg:h-48 lg:w-48"
+                  className="relative h-32 w-32 sm:h-40 sm:w-40 md:h-56 md:w-56 lg:h-64 lg:w-64"
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: 0.2, duration: 0.5 }}
@@ -87,7 +87,7 @@ export default function Home() {
                     src="/logo-bianco.png"
                     alt="Nautica Fuorigiri"
                     fill
-                    sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 192px"
+                    sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, (max-width: 1024px) 224px, 256px"
                     className="object-contain drop-shadow-[0_0_20px_rgba(37,99,235,0.5)]"
                     priority
                   />
@@ -99,29 +99,41 @@ export default function Home() {
             </SlideUp>
 
             <FadeIn delay={0.3}>
-              <p className="mb-6 text-lg text-white/90 sm:text-xl md:text-2xl drop-shadow-md">
-                La passione per la nautica al servizio della qualità e della
-                professionalità
-              </p>
-            </FadeIn>
-
-            <FadeIn delay={0.4}>
-              <p className="mb-6 text-sm leading-relaxed text-white/80 sm:text-base md:text-lg drop-shadow-sm">
-                Nautica Fuorigiri nasce dalla passione per la nautica e
-                dall'esigenza di fornire ai nostri clienti un servizio di qualità
-                ed una professionalità che non si erano mai viste in questo campo.
-                Ai nostri clienti facciamo vivere in totale relax l'esperienza
-                della nautica senza doversi preoccupare di finire nelle mani di
-                meccanici impreparati e cantieri disonesti.
-              </p>
-            </FadeIn>
-
-            <FadeIn delay={0.5}>
-              <p className="mb-10 text-sm font-medium leading-relaxed text-white/90 sm:text-base md:text-lg drop-shadow-sm">
-                Sappiamo benissimo che avete già sentito o letto queste parole in
-                molti altri siti internet, per questo non vi chiediamo di
-                crederci ma di verificare voi stessi affidandovi a noi.
-              </p>
+              <div className="mb-6 space-y-4 text-sm leading-relaxed text-white/90 sm:text-base md:text-lg drop-shadow-sm">
+                <p>
+                  Tra il mare di Montalto di Castro e il lago di Bolsena, c'è un luogo dove la nautica non è solo lavoro: è vocazione. Nautica Fuorigiri nasce da una passione autentica per le barche, i motori e tutto ciò che ruota intorno alla navigazione. Qui ogni intervento è fatto con cura, ogni cliente è ascoltato, ogni dettaglio conta.
+                </p>
+                <p>
+                  Guidato da Andrea, il cantiere è il frutto di anni di esperienza sul campo, di notti passate a cercare la soluzione giusta, e di giorni vissuti tra officina, pontili e prove in acqua. Non vendiamo sogni: li mettiamo in moto.
+                </p>
+                <p>
+                  Siamo concessionari ufficiali di marchi di eccellenza come Mercury MerCruiser, Mercury Racing, Yanmar, Selva ed Eolo Marine. Ma ciò che ci distingue non è solo la qualità dei prodotti: è il modo in cui li trattiamo, li montiamo, li testiamo. Con precisione, con rispetto, con passione.
+                </p>
+                <ul className="mt-4 space-y-2 list-none">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-white" aria-hidden="true" />
+                    <span>Servizi tecnici completi e specializzati.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-white" aria-hidden="true" />
+                    <span>Diagnosi accurata e interventi tempestivi.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-white" aria-hidden="true" />
+                    <span>Massima attenzione alla sicurezza e all'efficienza in navigazione.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-white" aria-hidden="true" />
+                    <span>Presenza diretta sul territorio, con ascolto e disponibilità</span>
+                  </li>
+                </ul>
+                <p className="mt-4">
+                  Nautica Fuorigiri è il punto d'incontro tra tecnica e cuore. È il posto giusto per chi vuole navigare sicuro, e per chi cerca un team che lavora con serietà, competenza e orgoglio.
+                </p>
+                <p className="font-medium">
+                  Benvenuti a bordo. Qui, ogni barca ha una storia. E ogni storia merita di essere raccontata bene.
+                </p>
+              </div>
             </FadeIn>
 
             <FadeIn delay={0.6}>
@@ -539,7 +551,7 @@ export default function Home() {
                       {/* Full image background */}
                       <div className="absolute inset-0">
                         <Image
-                          src="/rimessaggio.jpeg"
+                          src="/imb.jpeg"
                           alt="Imbarcazioni"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"

@@ -93,7 +93,7 @@ export function Footer() {
           </FadeIn>
 
           {/* Quick Links */}
-          <FadeIn delay={0.2}>
+          <FadeIn delay={0.2} className="pointer-events-auto">
             <div className="space-y-4">
               <h3 className="text-base font-semibold sm:text-lg">
                 Link Rapidi
@@ -103,22 +103,22 @@ export function Footer() {
                 aria-label="Link rapidi"
               >
                 <Link
-                  href="/servizi"
-                  className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm w-fit"
-                  aria-label="Vai alla pagina Servizi"
+                  href="/#servizi"
+                  className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm w-fit pointer-events-auto"
+                  aria-label="Vai alla sezione Servizi"
                 >
                   Servizi
                 </Link>
                 <Link
                   href="/offerte"
-                  className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm w-fit"
+                  className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm w-fit pointer-events-auto"
                   aria-label="Vai alla pagina Offerte"
                 >
                   Offerte
                 </Link>
                 <Link
                   href="/contatti"
-                  className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm w-fit"
+                  className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm w-fit pointer-events-auto"
                   aria-label="Vai alla pagina Contatti"
                 >
                   Contatti
